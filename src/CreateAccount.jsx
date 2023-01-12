@@ -5,10 +5,10 @@ export default function CreateAccount(){
     return(
             <div>
                 <h2>Enter in your Login information</h2>
-                    <form action={`/user/profile`} method="POST">
+                    <form action="createaccount" method="POST">
                         <div>
                             <label htmlFor='username' id='username'>Username</label>
-                            <input type="text" name='username' id="password"/>
+                            <input type="text" name='username' id="username"/>
                         </div>
 
                         <div>
