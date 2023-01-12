@@ -1,14 +1,21 @@
 
-import Login from './login'
-import CreateAccount from './CreateAccount';
+import './App.css';
+import {BlogForm} from './Components/BlogForm';
+
 
 function App() {
   return (
-  <main>
-    
-
-    <CreateAccount/>
-  </main>
+    <div>
+        <div className="navbar">
+            <navbar/>
+        </div>
+        <div className="GameBody">
+          <h1>
+            Welcome To Game Rater 
+          </h1>
+          <BlogForm/>
+        </div>
+      </div>
   );
 }
 
