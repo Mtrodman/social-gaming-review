@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import {BlogForm} from './Components/BlogForm';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+        <div className="navbar">
+            <navbar/>
+        </div>
+        <div className="GameBody">
+          <h1>
+            Welcome To Game Rater 
+          </h1>
+          <BlogForm/>
+        </div>
+      </div>
   );
 }
 
