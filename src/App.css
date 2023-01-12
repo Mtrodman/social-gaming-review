@@ -1,5 +1,13 @@
+body {
+  background-color: #3E829A;
+  cursor: url('./pointer1.png'), auto;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .App-logo {
@@ -35,4 +43,81 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.navBar {
+  background-color: #737373;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.rvwButt {
+  background-color: black;
+  color: white;
+  height: 75px;
+  border-radius: 20px;
+  font-size: large;
+  font-weight: bold;
+  position: relative;
+  left: 60px;
+}
+
+.rvwButt:hover {
+  background-color: white;
+  color: black;
+  cursor: url('./pointer2.png'), auto;
+}
+
+.profButt {
+  background-color: black;
+  color: white;
+  height: 75px;
+  border-radius: 20px;
+  width: 150px;
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 450px; 
+}
+
+.profButt:hover {
+  background-color: white;
+  color: black;
+  cursor: url('./pointer2.png'), auto;
+}
+
+.welcome {
+  background-color: #D9D9D9;
+  border-radius: 30px;
+  border-style: dashed;
+  border-color: black;
+  border-width: thick;
+  padding: 10px;
+  margin: 10px;
+  color: black;
+}
+
+.revBox {
+  background-color: #D9D9D9;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+
+.rev {
+  background-color: #8C52FF;
+  width: 95%;
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+  height: 100px;
 }
