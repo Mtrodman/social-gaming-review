@@ -12,7 +12,7 @@ function App() {
       </div>
       <Feed/>   
     </div>
-  );
-}
+)}
+
 
 export default App;

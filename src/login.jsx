@@ -1,10 +1,9 @@
-import React from 'react'
 
-export default function login(){
-
+export default async function Login(){
+return(
                 <div class="col">
                     <h2 className='loginHeader'>Enter in your Login information</h2>
-                    <form action='login/check' method="POST"> 
+                    <form action='logincheck' method="POST"> 
                         <div class="row">
                         <label class="form-label" htmlFor='username' id='username'>Username</label>
                         <input class="form-constrol-sm" type="text" name='username' id="password"/>
@@ -18,7 +17,7 @@ export default function login(){
                         </div>
                     </form>
                 </div>
-    
+)
 }
 
 
