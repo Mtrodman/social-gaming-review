@@ -2,22 +2,61 @@ require('dotenv').config
 const express = require('express')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+const methodOverride = require('method-override')
 const app = express()
 
 const User = require('./models/users')
+const Post = require('./models/post')
+const { Router } = require('express')
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(methodOverride('_method'))
 
+app.get('/', (res,req) => {
+    res.send('Hello')
+})
+app.get('/game', async (res, req) => {
+    let posts = Post.find()
+    res.json(posts)
+})
 
-app.get('/logincheck', async (res, req) => {
 
+app.post('/game', async (res, req) => {
+    const userAccess = req.cookies['user-access']
+
+    let user = await User.findById(userAccess).populate('posts')
+    let newPost = Post.create(req.body)
+
+    await user.posts.push(newPost.id)
+    user.save()
+    res.redirect('/game')
+})
+
+// app.get('/login', (res, req) => {
+//     res.render('login')
+// })
+
+app.get('/createaccount', (req, res) => {
+    console.log('Hello')
+    res.send('CreateAccount')
+})
+
+
+
+app.get('/profile/:id'), async(res,req) => {
+
+    let findUsers = await User.findById(req.params.id).populate('posts')
+    res.json(findUsers)
+}
+
+
+app.post('/logincheck', async (res, req) => {
 
     const {username, password} = req.body
     let userAuthentification = await User.findOne({where: {username: username}})
@@ -34,8 +73,7 @@ app.get('/logincheck', async (res, req) => {
     }
 
         try{
-        const accessToken = createToken(userAuthentification)
-        res.cookie("user-access", userAuthentification,{
+        res.cookie("user-access", userId,{
             maxAge: 60*60*24*2*1000,
             httpOnly: true
         })
@@ -48,9 +86,9 @@ app.get('/logincheck', async (res, req) => {
 
 })
 
-app.get('/createaccount', async (res, req) => {
+app.post('/createaccount', async (res, req) => {
 
-    const {name, username, password, posts} = req.body
+    const {username, password, posts} = req.body
     const hash = await bcrypt.hash(password, 10)
     let findUsers = await User.find()
 
@@ -66,8 +104,6 @@ app.get('/createaccount', async (res, req) => {
 
     if(duplicateUsername.length == 0 && duplicateEmail.length == 0){
         let createUsers = await User.create({
-            name: name,
-            email: email,
             username: username,
             password: hash,
             posts: posts
@@ -90,6 +126,8 @@ app.get('/createaccount', async (res, req) => {
         res.status(400).json('Username and email is already in use')
     }
 })
+
+
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true},
     () => {console.log(process.env.MONGO_URI)})
 
