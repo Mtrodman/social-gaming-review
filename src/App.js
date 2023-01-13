@@ -1,7 +1,7 @@
 
 import './App.css';
 import {BlogForm} from './Components/BlogForm';
-
+import {GameFormSubmit} from './Components/GameFormSubmit';
 
 function App() {
   return (
@@ -14,6 +14,9 @@ function App() {
             Welcome To Game Rater 
           </h1>
           <BlogForm/>
+          <br/>
+          <br/>
+          <GameFormSubmit/>
         </div>
       </div>
   );

@@ -1,41 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function GameFormSubmit() {
+  const [title, setTitle] = useState('');
+  const [rating, setRating] = useState('');
+  const [review, setReview] = useState('');
 
-
-  const SubmitForm = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    // do something with the form data here
-    alert('Your Game Rating has been submited')
+    alert("Your review has been submited.")
+    // send form data to server or perform other logic
+    console.log(title, rating, review);
+    setTitle("");
+    setRating("");
+    setReview("");
   }
 
   return (
-    <form action={`/GameTitle/Rating/Review`} method="POST" onSubmit={SubmitForm}>
-     <div>
-        <label htmlFor='GameTitle' id='GameTitle'>
-            Game Title:
-        <input type="text" name='GameTitle' id="GameTitle"/>
-        </label>
-      </div>
-      <br/>
-      <div>
-      <label htmlFor='Rating' id='Rating'>
+    <form action="GameFormUpdate" method="POST" onSubmit={handleSubmit}>
+      <label>
+        Title:
+        <input
+          type="text"
+          name="title"
+          id="titel"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      </label>
+      <br />
+      <label>
         Rating:
         <input
-          type="number" name='Rating' id="Rating"/>
+          type="number"
+          name="rating"
+          id="rating"
+          value={rating}
+          onChange={(event) => setRating(event.target.value)}
+        />
       </label>
-      </div>
       <br />
-      <div>
-      <label htmlFor='Review' id='Review'>
+      <label>
         Review:
-        <textarea type="text" name='Review' id="Review"/>
+        <textarea
+          name="review"
+          id="review"
+          value={review}
+          onChange={(event) => setReview(event.target.value)}
+        />
       </label>
-      </div>
       <br />
-      {/* <button type='submit' onClick={SubmitForm}>Submit</button> */}
-
-      <input type='submit' value='Submit'></input>
+      <button type="submit">Submit</button>
     </form>
   );
 }

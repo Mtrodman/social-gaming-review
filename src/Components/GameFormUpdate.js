@@ -1,52 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function GameFormUpdate() {
- 
+  const [title, setTitle] = useState('');
+  const [rating, setRating] = useState('');
+  const [review, setReview] = useState('');
 
-  const UpdateForm = (event) => {
+  const handleUpdate = (event) => {
     event.preventDefault();
-    // do something with the form data here
-    alert('Your Game Rating has been updated')
-  }
-
-  const DeleteForm = (event) => {
-    event.preventDefault();
-    // do something with the form data here
-    alert('Your Game Rating has been deleted')
+    alert("Your review has been updated.")
+    // send form data to server or perform other logic
+    console.log(title, rating, review);
   }
 
   return (
-    <form action={`/GameTitle/Rating/Review`} method="PUT" onUpdateForm={UpdateForm}>
-      <div>
-        <label htmlFor='GameTitle' id='GameTitle'>
-          Game Title:
-        <input type="text" name='GameTitle' id="GameTitle"/>
-        </label>
-      </div>
+    <form action="GameFormUpdate" method="PUT" onSubmit={handleUpdate}>
+      <label>
+        Title:
+        <input
+          type="text"
+          name="title"
+          id="titel"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      </label>
       <br />
-      <div>
-        <label htmlFor='Rating' id='Rating'>
-          Rating:
-          <input
-            type="number" name='Rating' id="Rating"/>
-        </label>
-      </div>
+      <label>
+        Rating:
+        <input
+          type="number"
+          name="rating"
+          id="rating"
+          value={rating}
+          onChange={(event) => setRating(event.target.value)}
+        />
+      </label>
       <br />
-      <div>
-        <label htmlFor='Review' id='Review'>
-          Review:
-          <textarea type="text" name='Review' id="Review"/>
-        </label>
-      </div>
+      <label>
+        Review:
+        <textarea
+          name="review"
+          id="review"
+          value={review}
+          onChange={(event) => setReview(event.target.value)}
+        />
+      </label>
       <br />
-      <button type='submit' onClick={UpdateForm}>Update</button>
-      <button type='submit' onClick={DeleteForm}>Delete</button>
-
-      {/* <input type="submit" value="Update"></input>
-      <input type="submit" value="Delete"></input> */}
-      
-     
-     
+      <button type="submit">Update</button>
     </form>
   );
 }

@@ -1,35 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+const BlogForm = () => {
+  const [formData, setFormData] = useState([
+    { title: '', rating: '', review: '' },
+  ]);
 
-function BlogForm() {
-  
-  const UserName = [];
-  const GameForm = ['GameTitle', 'Ratings', 'Reviews']
-
-  UserName.forEach(({Id}) => {
-    GameForm.push('GameTitle', 'Rating', 'Review')
-  })
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    const newFormData = [...formData];
+    newFormData[index][name] = value;
+    setFormData(newFormData);
+  };
 
   return (
-    <form action={`/GameTitle/Rating/Review`} method="GET" onSubmit={SubmitForm}>
-     <label htmlFor='GameTitle' id='GameTitle'>
-        Game Title:
-        <input type="text" name='GameTitle' id="GameTitle"/>
-      </label>
-      <br />
-      <label htmlFor='Rating' id='Rating'>
-        Ratings:
-        <input
-          type="number" name='Rating' id="Rating"/>
-      </label>
-      <br />
-      <label htmlFor='Review' id='Review'>
-        Review:
-        <textarea type="text" name='Review' id="Review"/>
-      </label>
-      <br />
+    <form action="BlogForm" method="GET">
+      {formData.map((form, index) => (
+        <div key={index}>
+          <label>
+            Game Title:
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={form.title}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </label>
+          <br />
+          <label>
+            Rating:
+            <input
+              type="text"
+              name="rating"
+              id="rating"
+              value={form.rating}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </label>
+          <br />
+          <label>
+            Review:
+            <textarea
+              name="review"
+              id="review"
+              value={form.review}
+              onChange={(e) => handleChange(e, index)}
+            />
+          </label>
+          <br />
+        </div>
+      ))}
     </form>
   );
-}
-  
+};
+
 export {BlogForm};
