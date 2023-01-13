@@ -6,14 +6,23 @@ function GameFormUpdate() {
   const [review, setReview] = useState('');
 
   const handleUpdate = (event) => {
+    setTitle(event.target.value);
+    setRating(event.target.value);
+    setReview(event.target.value);
     event.preventDefault();
     alert("Your review has been updated.")
     // send form data to server or perform other logic
     console.log(title, rating, review);
   }
 
+  const handleDelete = () => {
+    setTitle('');
+    setRating('');
+    setReview('');
+  }
+
   return (
-    <form action="GameFormUpdate" method="PUT" onSubmit={handleUpdate}>
+    <form action="GameFormUpdate" method="PUT">
       <label>
         Title:
         <input
@@ -46,7 +55,8 @@ function GameFormUpdate() {
         />
       </label>
       <br />
-      <button type="submit">Update</button>
+      <button type="button" onClick={handleUpdate}>Update</button>
+      <button type="button" onClick={handleDelete}>Delete</button>
     </form>
   );
 }

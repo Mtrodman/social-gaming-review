@@ -6,14 +6,18 @@ function GameFormSubmit() {
   const [review, setReview] = useState('');
 
   const handleSubmit = (event) => {
+    setTitle(event.target.value);
+    setRating(event.target.value);
+    setReview(event.target.value);
     event.preventDefault();
-    alert("Your review has been submited.")
+    alert("Your review has been updated.")
     // send form data to server or perform other logic
     console.log(title, rating, review);
     setTitle("");
     setRating("");
     setReview("");
   }
+
 
   return (
     <form action="GameFormUpdate" method="POST" onSubmit={handleSubmit}>
