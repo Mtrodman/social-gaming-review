@@ -17,8 +17,7 @@ function GameFormSubmit() {
     setRating("");
     setReview("");
   }
-
-
+  
   return (
     <form action="GameFormUpdate" method="POST" onSubmit={handleSubmit}>
       <label>
