@@ -1,43 +1,19 @@
 import React from 'react'
+import {GameFormUpdate} from '../components/GameFormUpdate';
 
 function Feed() {
     return (
         <div className='revBox'>
 
             <div className='rev'>Review 1!
+                    
+            <GameFormUpdate/>
 
-                <div className='revButts'>
-                    <button>Update</button><button>Delete</button>
-                </div>
-            
-            </div>
-
-            <div className='rev'>Review 2!
-
-                <div className='revButts'>
-                    <button>Update</button><button>Delete</button>
-                </div>
-
-            </div>
-
-            <div className='rev'>Review 3!
-
-                <div className='revButts'>
-                    <button>Update</button><button>Delete</button>
-                </div>
-
-            </div>
-
-            <div className='rev'>Review 4!
-
-                <div className='revButts'>
-                    <button>Update</button><button>Delete</button>
-                </div>
-            
-            </div>
-
-        </div>
+             </div>
+         </div>       
     )
 }
+
+
 
 export {Feed};
