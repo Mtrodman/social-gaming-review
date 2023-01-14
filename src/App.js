@@ -1,6 +1,6 @@
 import './App.css';
-import {BlogForm} from './Components/BlogForm';
-import {GameFormSubmit} from './Components/GameFormSubmit';
+
+
 
 import { NavBar } from './components/NavBar';
 import { Feed } from './components/Feed';
