@@ -1,5 +1,5 @@
 import React from 'react'
-import {GameFormUpadate} from '../components/GameFormUpdate';
+import {GameFormUpdate} from '../components/GameFormUpdate';
 
 function Feed() {
     return (
@@ -7,11 +7,13 @@ function Feed() {
 
             <div className='rev'>Review 1!
                     
-                    <GameFormUpdate/>
+            <GameFormUpdate/>
 
              </div>
          </div>       
     )
 }
+
+
 
 export {Feed};
