@@ -1,33 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const POST = async () => {
+  await fetch('/GameFormSubmit', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title,
+      rating: rating,
+      review: review,
+    })
+  });
+  setTitle(formData.title);
+  setRating(formData.rating);
+  setReview(formData.review);
+}
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/todos')
+  .then(response => (response.json))
+  .then(json => useState(json))
+}, []);
 
 function GameFormSubmit() {
-  const [title, setTitle] = useState('');
-  const [rating, setRating] = useState('');
-  const [review, setReview] = useState('');
+  const [formData, setFormData] = useState([setFormData]);
 
-  const handleSubmit = (event) => {
-    setTitle(event.target.value);
-    setRating(event.target.value);
-    setReview(event.target.value);
-    event.preventDefault();
-    alert("Your review has been updated.")
-    // send form data to server or perform other logic
-    console.log(title, rating, review);
-    setTitle("");
-    setRating("");
-    setReview("");
-  }
-  
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    const newFormData = [...formData];
+    newFormData[index][name] = value;
+    setFormData(newFormData);
+  };
+
   return (
-    <form action="GameFormUpdate" method="POST" onSubmit={handleSubmit}>
+    <form action="GameFormUpdate">
       <label>
         Title:
         <input
           type="text"
           name="title"
           id="titel"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          value={form.title}
+          onChange={(e) => handleChange(e, index)}
         />
       </label>
       <br />
@@ -37,8 +51,8 @@ function GameFormSubmit() {
           type="number"
           name="rating"
           id="rating"
-          value={rating}
-          onChange={(event) => setRating(event.target.value)}
+          value={form.rating}
+          onChange={(e) => handleChange(e, index)}
         />
       </label>
       <br />
@@ -47,12 +61,12 @@ function GameFormSubmit() {
         <textarea
           name="review"
           id="review"
-          value={review}
-          onChange={(event) => setReview(event.target.value)}
+          value={form.review}
+          onChange={(e) => handleChange(e, index)}
         />
       </label>
       <br />
-      <button type="submit">Submit</button>
+      <button type="submit" method="POST" onSubmit={POST}>Submit</button>
     </form>
   );
 }
