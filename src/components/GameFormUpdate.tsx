@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 
 // GET Route
 // -----------------------
-const GET = async () => {
+const GET = async (title: string, rating: number, review: string) => {
   await fetch('/GameFormUpdate', {
     method: 'GET',
     headers: {
@@ -14,43 +15,43 @@ const GET = async () => {
       review: review,
     })
   });
-  setTitle(formData.title);
-  setRating(formData.rating);
-  setReview(formData.review);
+  setTitle(FormData.title);
+  setRating(FormData.rating);
+  review(FormData.review);
 }
 useEffect(() => {
   fetch('https://jsonplaceholder.typicode.com/todos')
-  .then(response => (response.json))
-  .then(json => setFormData(json))
+  .then(response => (response.json()))
+  .then(json => new FormData(json))
 }, []);
 
 // PUT Route
 // -----------------------
-const PUT = async () => {
-    await fetch('/GameFormUpdate', {
-      method: 'PUT',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: title,
-        rating: rating,
-        review: review,
-      })
-    });
-    setTitle(formData.title);
-    setRating(formData.rating);
-    setReview(formData.review);
-  }
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
-    .then(response => (response.json))
-    .then(json => setFormData(json))
-  }, []);
+const PUT = async (title: string, rating: number, review: string) => {
+  await fetch('/GameFormUpdate', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title,
+      rating: rating,
+      review: review,
+    })
+  });
+  setTitle(FormData.title);
+  rating(FormData.rating);
+  review(FormData.review);
+}
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/todos')
+  .then(response => (response.json()))
+  .then(json => setFormData(json))
+}, []);
 
 // DELETE Route
 // ------------------------
-const DELETE = async () => {
+const DELETE = async (title: string, rating: number, review: string) => {
   await fetch('/GameFormUpdate', {
     method: 'DELETE',
     headers: {
@@ -68,21 +69,24 @@ const DELETE = async () => {
 }
 useEffect(() => {
   fetch('https://jsonplaceholder.typicode.com/todos')
-  .then(response => (response.json))
+  .then(response => (response.json()))
   .then(json => setFormData(json))
 }, []);
 
 const GameFormUpdate = () => {
 
-  const [formData, setFormData] = useState([setFormData]);
+  const [formData, setFormData] = useState([]);
 
-  const handleChange = (e, index) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     const { name, value } = e.target;
     const newFormData = [...formData];
     newFormData[index][name] = value;
     setFormData(newFormData);
   };
 
+  const [title, setTitle] = useState("");
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
   return (
     <form action="BlogForm" method="GET" onSubmit={GET}>
       {formData.map((form, index) => (
@@ -129,5 +133,10 @@ const GameFormUpdate = () => {
   );
  }
 
-
 export {GameFormUpdate};
+
+
+  function setTitle(title: any) {
+    throw new Error('Function not implemented.');
+  }
+
